@@ -1,0 +1,29 @@
+.ram__navbar {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  width: 100%;
+  height: 40px;
+  background: #444;
+}
+
+.navbar {
+  &__logo {
+    font-family: misfits;
+    font-size: 20px;
+    color: #02ABC3;
+    -webkit-text-stroke: 1px #00F0A3;
+    text-shadow: 0 0 8px #00F0A3;
+  }
+  &__btns {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: white;
+  }
+  &__btn {
+    padding: 0 8px;
+  }
+}

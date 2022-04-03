@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import './App.scss';
+import DataService from './API/DataService'
+import { useFetching } from './hooks/useFetching'
+import Navbar from './components/Navbar/Navbar';
+import AppRouter from './components/AppRouter/AppRouter';
+import moment from 'moment';
 
-function App() {
+const App = () => {
+  const [characters, setCharacters] = useState([])
+  // const [page, setPage] = useState(1)
+  // const [limit, setLimit] = useState(10)
+  const [fetchingData, isLoading, error] = useFetching(async () => {
+    const characters: any = await DataService.getCharacters()  
+    setCharacters(characters.data.results)
+  }) as any
+  
+  useEffect(() => { fetchingData() }, [])
+  console.log(characters)
+  console.log(moment().subtract(10, 'days').calendar())
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <Navbar/>
+      <AppRouter characters={characters}/>
+    </main>
   );
 }
 
 export default App;
+
