@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { FC } from 'react'
 import classes from './Login.module.scss'
 
-const Login = () => {
+const Login: FC = (): JSX.Element => {
   return (
     <div className={classes.login}>Login</div>
   )

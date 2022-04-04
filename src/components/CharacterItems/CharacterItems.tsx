@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { FC } from 'react'
+import { CharactersType } from '../../App'
 import CharacterItem from '../CharacterItem/CharacterItem'
 import classes from './CharacterItems.module.scss'
 
-const CharacterItems = ( {characters}: any) => {
+type CharacterItemsPropsType = {
+  characters: CharactersType,
+}
+
+const CharacterItems: FC<CharacterItemsPropsType> = ( {characters}) => {
   return (
     <ul className={classes.items}>
-      {characters.map((character: any) => 
+      {characters.map((character) => 
         <CharacterItem character={character} key={character.id}/>
       )}
   </ul>
