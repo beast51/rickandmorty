@@ -1,11 +1,6 @@
 import React, { FC } from 'react'
-import { CharactersType } from '../../App'
 
-type CharacterPropsType = {
-  characters: CharactersType
-}
-
-const Character: FC<CharacterPropsType> = ({characters}) => {
+const Character: FC = () => {
   return (
     <div>Character</div>
   )
