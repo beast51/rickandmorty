@@ -1,0 +1,16 @@
+.input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 2px solid rgba(0, 0, 0, 0.22);
+  box-sizing: border-box;
+  border-radius: 10px;
+  outline: none;
+  transition: all 0.3s;
+  @media (min-width: 1024px) {
+    margin-bottom: 24px;
+  } 
+  &:focus {
+    border: 2px solid #02ABC3;
+  }
+}

@@ -1,3 +1,13 @@
 .login {
-  padding-top: 40px;
+  padding: 56px 16px;
+  @media (min-width: 1024px) {
+    padding: 64px 24px;
+  }
+  @media (min-width: 1366px) {
+    width: 100%;
+    max-width: 1366px;
+    margin: 0 auto;
+    padding: 64px 0px;
+  }
 }
+

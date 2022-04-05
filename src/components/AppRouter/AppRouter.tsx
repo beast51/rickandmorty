@@ -11,11 +11,14 @@ import NotFound from '../../pages/NotFound/NotFound'
 // console.log(routes)
 
 type AppRouterPropsType = {
-  characters: CharactersType,
-  isAuth: boolean
+  characters: any,
+  isAuth: boolean,
+  loginHandler: (e: any) => void
+  searchQuery: string
+  searchHandler: (e: any) => void
 }
 
-const AppRouter: FC<AppRouterPropsType> = ({characters, isAuth}): JSX.Element => {
+const AppRouter: FC<AppRouterPropsType> = ({characters, isAuth, loginHandler, searchQuery, searchHandler}): JSX.Element => {
   // console.log(routes)
 
   return (
@@ -26,8 +29,8 @@ const AppRouter: FC<AppRouterPropsType> = ({characters, isAuth}): JSX.Element =>
       )} */}
       <Route index={undefined} path="/" element={<App/>} />
       <Route index={true} element={<Home />} />
-      <Route index={undefined} path="login" element={<Login />} />
-      <Route index={undefined} path="characters" element={<Characters characters={characters}/>} />
+      <Route index={undefined} path="login" element={<Characters characters={characters} searchQuery={searchQuery} searchHandler={searchHandler}/>} />
+      <Route index={undefined} path="characters" element={<Characters characters={characters} searchQuery={searchQuery} searchHandler={searchHandler}/>} />
       <Route index={undefined} path="character" element={<Character characters={characters}/>} />
       <Route path="*" element={<NotFound />} />
     </Routes>
@@ -35,7 +38,7 @@ const AppRouter: FC<AppRouterPropsType> = ({characters, isAuth}): JSX.Element =>
     <Routes>
       <Route path="/" element={<App/>} />
       <Route index element={<Home />} />
-      <Route path="/login" element={<Login />} />
+      <Route path="/login" element={<Login loginHandler={loginHandler}/>} />
     </Routes>
   )
 }

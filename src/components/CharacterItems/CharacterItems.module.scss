@@ -2,7 +2,6 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
-  padding: 16px;
   @media (min-width: 768px) {
     & {
       grid-template-columns: 1fr 1fr 1fr;
@@ -11,6 +10,11 @@
   @media (min-width: 1024px) {
     & {
       grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+  @media (min-width: 1366px) {
+    & {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     }
   }
 }

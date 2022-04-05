@@ -4,7 +4,7 @@ import DataService from './API/DataService'
 import { useFetching } from './hooks/useFetching'
 import Navbar from './components/Navbar/Navbar';
 import AppRouter from './components/AppRouter/AppRouter';
-// import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 export type CharactersType = [{
   id: number,
@@ -29,6 +29,8 @@ export type CharactersType = [{
 
 const App: FC = (): JSX.Element => {
   const [characters, setCharacters] = useState<CharactersType>([])
+  // const [sortedCharacters, setSortedCharacters] = useState<CharactersType>([])
+  const [searchQuery, setSearchQuery] = useState('')
   // const [page, setPage] = useState(1)
   // const [limit, setLimit] = useState(10)
   const [fetchingData, isLoading, error] = useFetching(async () => {
@@ -36,11 +38,30 @@ const App: FC = (): JSX.Element => {
     setCharacters(characters.data.results)
   }) as any
   
-  useEffect(() => { fetchingData() }, [])
   const [isAuth, setIsAuth] = useState(true)
-  const loginHandler = ():void => {
-    setIsAuth(!isAuth)
+  const navigate = useNavigate()
+  
+
+  const searchHandler = (e: any) => {
+    setSearchQuery(e.target.value)
   }
+
+  const loginNavbarHandler = ():void => {
+    if (isAuth) {
+      setIsAuth(!isAuth)
+    }
+    navigate('/login')
+    // setIsAuth(!isAuth)
+  }
+  const loginHandler = (e: any):void => {
+    e.preventdefault()
+    setIsAuth(!isAuth)
+    navigate('/characters')
+  }
+
+  const sortedCharacters = () => {
+    return characters.filter(character => character.name.includes(searchQuery))
+  } 
 
   // const navigate = useNavigate()
   // useEffect(() => {
@@ -50,10 +71,12 @@ const App: FC = (): JSX.Element => {
   // }, [isAuth, navigate])
   console.log(characters)
 
+  useEffect(() => { fetchingData() }, [])
+
   return (
-    <main>
-      <Navbar isAuth={isAuth} loginHandler={loginHandler}/>
-      <AppRouter characters={characters} isAuth={isAuth}/>
+    <main> 
+      <Navbar isAuth={isAuth} loginNavbarHandler={loginNavbarHandler} loginHandler={loginHandler}/>
+      <AppRouter characters={sortedCharacters()} isAuth={isAuth} loginHandler={loginHandler} searchQuery={searchQuery} searchHandler={searchHandler}/>
     </main>
   );
 }

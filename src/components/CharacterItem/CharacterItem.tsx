@@ -37,12 +37,12 @@ const CharacterItem: FC<CharacterItemPropsType> = ({ character }) => {
       <img className={classes.item__image} src={character.image} alt={character.name} />
       <ul>
         <li className={classes.item__field}>{character.name}</li>
-        <li className={classes.item__field}>{character.species}</li>
+        {/* <li className={classes.item__field}>{character.species}</li>
         <li className={classes.item__field}>{character.gender}</li>
-        <li className={classes.item__field}>Location: {character.location.name}</li>
+        <li className={classes.item__field}>Location: {character.location.name}</li> */}
         {/* <li>{character.episode}</li> */}
         <li className={classes.item__field}>Status: <span className={statusObject[character.status]}>{character.status}</span></li>
-        <li className={classes.item__field}>{moment(character.created).calendar()}</li>
+        {/* <li className={classes.item__field}>{moment(character.created).calendar()}</li> */}
     </ul>
   </li>
   )
