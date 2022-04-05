@@ -5,51 +5,63 @@ import { useFetching } from '../../hooks/useFetching'
 import Input from '../../components/UI/Input/Input'
 import classes from './Characters.module.scss'
 
-export type CharactersType = {
-  id: number,
-  name: string,
-  origin: {
-    name: string,
-    url: string,
-  },
-  species: string,
-  gender: string,
-  status: string,
-  image: string,
-  created: Object,
-  location: {
-    name: string,
-    url: string,
-  },  
-  url: string,
-}[] | []
+export type CharactersType =
+  | {
+      id: number
+      name: string
+      origin: {
+        name: string
+        url: string
+      }
+      species: string
+      gender: string
+      status: string
+      image: string
+      created: Object
+      location: {
+        name: string
+        url: string
+      }
+      url: string
+    }[]
+  | []
 
 const Characters: FC = (): JSX.Element => {
-
   const [characters, setCharacters] = useState<CharactersType>([])
-  
+  const [page, setPage] = useState(1)
   const [searchQuery, setSearchQuery] = useState('')
-  
+
+  console.log(characters)
+
   const [fetchingData, isLoading, error] = useFetching(async () => {
-    const characters = await DataService.getCharacters()  
-    setCharacters(characters.data.results)
+    const response = await DataService.getCharacters(page)
+    console.log(response.data.results)
+    setCharacters(response.data.results)
   }) as any
-  
+
   const sortedCharacters = () => {
-    return characters.filter(character => character.name.includes(searchQuery))
-  } 
+    return characters.filter((character) =>
+      character.name.includes(searchQuery)
+    )
+  }
 
   const searchHandler = (e: any) => {
     setSearchQuery(e.target.value)
   }
-   
-  useEffect(() => { fetchingData() }, [fetchingData])
+
+  useEffect(() => {
+    fetchingData()
+  }, [])
 
   return (
     <div className={classes.characters}>
-      <Input value={searchQuery} onChange={searchHandler} className={classes.characters__input} 
-      placeholder="Search..."/>
-      <CharacterItems characters={sortedCharacters()}/>
+      <Input
+        value={searchQuery}
+        onChange={searchHandler}
+        className={classes.characters__input}
+        placeholder="Search..."
+      />
+      <CharacterItems characters={sortedCharacters()} />
     </div>
   )
 }

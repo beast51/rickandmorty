@@ -20,11 +20,12 @@ const AppRouter: FC<AppRouterPropsType> = ({
     <Routes>
       {/* {routes.map((route, i) => <Route index={route.index} path={route.path} element={route.element === Characters ? <Characters characters={characters}/> : route.element}/>
       )} */}
-      <Route index={undefined} path="/" element={<App />} />
-      <Route index={true} element={<Home />} />
-      <Route index={undefined} path="login" element={<Characters />} />
-      <Route index={undefined} path="characters" element={<Characters />} />
-      <Route index={undefined} path="character" element={<Character />} />
+      <Route path="/" element={<App />} />
+      <Route index element={<Home />} />
+      <Route path="login" element={<Characters />} />
+      <Route path="characters" element={<Characters />} />
+      <Route path="character" element={<Character />} />
+      <Route path="character/:id" element={<Character />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   ) : (

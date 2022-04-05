@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import classes from './CharacterItem.module.scss'
+import { useNavigate } from 'react-router-dom'
 
 type CharacterItemPropsType = {
   character: {
@@ -31,8 +32,15 @@ const statusObject: {
 }
 
 const CharacterItem: FC<CharacterItemPropsType> = ({ character }) => {
+  const navigate = useNavigate()
+
+  const clickHadler = (id: number) => {
+    console.log(id)
+    navigate(`/character/${id}`)
+  }
+
   return (
-    <li className={classes.item}>
+    <li className={classes.item} onClick={() => clickHadler(character.id)}>
       <img
         className={classes.item__image}
         src={character.image}
