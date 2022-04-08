@@ -31,7 +31,7 @@ const Characters: FC = (): JSX.Element => {
 
   const sortedCharacters = () => {
     return characters.filter((character) =>
-      character.name.includes(searchQuery)
+      character.name.toLowerCase().includes(searchQuery)
     )
   }
 
