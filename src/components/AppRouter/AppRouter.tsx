@@ -24,6 +24,7 @@ const AppRouter: FC<AppRouterPropsType> = ({
       <Route index element={<Home />} />
       <Route path="login" element={<Characters />} />
       <Route path="characters" element={<Characters />} />
+      <Route path="characters/:id" element={<Characters />} />
       <Route path="character" element={<Character />} />
       <Route path="character/:id" element={<Character />} />
       <Route path="*" element={<NotFound />} />

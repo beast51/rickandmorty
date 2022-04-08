@@ -1,32 +1,10 @@
 import moment from 'moment'
 import React, { FC, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-
 import DataService from '../../API/DataService'
 import { useFetching } from '../../hooks/useFetching'
+import { CharacterType } from '../../types/types'
 import classes from './Character.module.scss'
-
-export type CharacterType =
-  | {
-      id: number
-      name: string
-      episode: string[]
-      origin: {
-        name: string
-        url: string
-      }
-      species: string
-      gender: string
-      status: string
-      image: string
-      created: Object
-      location: {
-        name: string
-        url: string
-      }
-      url: string
-    }
-  | undefined
 
 const statusObject: {
   [key: string]: string
@@ -40,7 +18,6 @@ const Character: FC = (): JSX.Element => {
   const [character, setCharacter] = useState<CharacterType>()
   const [firstEpisode, setFirstEpisode] = useState('')
   const params = useParams()
-  console.log(params.id)
 
   const [fetchingData, isLoading, error] = useFetching(async () => {
     const character = await DataService.getCharacterById(Number(params.id))

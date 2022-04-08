@@ -1,27 +1,7 @@
 import React, { FC } from 'react'
 import classes from './CharacterItem.module.scss'
-import { useNavigate } from 'react-router-dom'
-
-type CharacterItemPropsType = {
-  character: {
-    id: number
-    name: string
-    origin: {
-      name: string
-      url: string
-    }
-    species: string
-    gender: string
-    status: string
-    image: string
-    created: Object
-    location: {
-      name: string
-      url: string
-    }
-    url: string
-  }
-}
+import { useLocation, useNavigate } from 'react-router-dom'
+import { CharacterItemPropsType } from '../../types/types'
 
 const statusObject: {
   [key: string]: string
@@ -31,34 +11,25 @@ const statusObject: {
   unknown: classes.field__status_unknown,
 }
 
-const CharacterItem: FC<CharacterItemPropsType> = ({ character }) => {
+const CharacterItem: FC<CharacterItemPropsType> = ({
+  character: { id, name, image, status },
+}) => {
   const navigate = useNavigate()
-
+  const location = useLocation()
+  const pageNumber = location.pathname.split('/')[2]
   const clickHadler = (id: number) => {
-    console.log(id)
-    navigate(`/character/${id}`)
+    navigate(`/character/${id}`, { state: { page: pageNumber } })
+    console.log(pageNumber)
   }
 
   return (
-    <li className={classes.item} onClick={() => clickHadler(character.id)}>
-      <img
-        className={classes.item__image}
-        src={character.image}
-        alt={character.name}
-      />
+    <li className={classes.item} onClick={() => clickHadler(id)}>
+      <img className={classes.item__image} src={image} alt={name} />
       <ul>
-        <li className={classes.item__field}>{character.name}</li>
-        {/* <li className={classes.item__field}>{character.species}</li>
-        <li className={classes.item__field}>{character.gender}</li>
-        <li className={classes.item__field}>Location: {character.location.name}</li> */}
-        {/* <li>{character.episode}</li> */}
+        <li className={classes.item__field}>{name}</li>
         <li className={classes.item__field}>
-          Status:{' '}
-          <span className={statusObject[character.status]}>
-            {character.status}
-          </span>
+          Status: <span className={statusObject[status]}>{status}</span>
         </li>
-        {/* <li className={classes.item__field}>{moment(character.created).calendar()}</li> */}
       </ul>
     </li>
   )

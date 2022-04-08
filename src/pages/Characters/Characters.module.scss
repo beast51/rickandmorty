@@ -1,18 +1,32 @@
 .characters {
-  padding: 56px 16px 16px;
-  max-width: 1366px;
-  margin: 0 auto;
-  background: #E5E5E5;
+  // background: #E5E5E5;
+  &__container {
+    padding: 56px 16px 16px;
+    max-width: 1366px;
+    margin: 0 auto;
+    // background: #E5E5E5;
+  }
   @media (min-width: 768px) {
+    &__container {
     padding: 56px 16px 24px;
   }
+  }
   @media (min-width: 1024px) {
-    padding: 64px 24px 40px;
+    &__container {
+    padding: 64px 24px 40px;}
   }
   @media (min-width: 1366px) {
+    &__container {
     padding: 64px 0px 60px;
+    }
   }
   &__input {
     color: rgba(0, 0, 0, 0.87);
+  }
+  &__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 0;
   }
 }

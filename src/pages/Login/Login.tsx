@@ -4,18 +4,22 @@ import Input from '../../components/UI/Input/Input'
 import classes from './Login.module.scss'
 
 type LoginPropsType = {
-  loginHandler: (e: any) => void
+  loginHandler: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
-const Login: FC<LoginPropsType> = ({loginHandler}): JSX.Element => {
+const Login: FC<LoginPropsType> = ({ loginHandler }): JSX.Element => {
   return (
     <div className={classes.login}>
       <form>
-        <Input type="text" placeholder="Login"/> 
-        <Input type="text" placeholder="Password"/>
-        <Button onClick={(e: any) => loginHandler(e)} className={classes.form__button}>Login</Button> 
+        <Input type="text" placeholder="Login" />
+        <Input type="text" placeholder="Password" />
+        <Button
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => loginHandler(e)}
+          className={classes.form__button}
+        >
+          Login
+        </Button>
       </form>
-      
     </div>
   )
 }
