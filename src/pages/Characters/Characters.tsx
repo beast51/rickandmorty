@@ -34,7 +34,7 @@ const Characters: FC = (): JSX.Element => {
   }
 
   const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value)
+    setSearchQuery(e.target.value.toLowerCase())
   }
 
   useEffect(() => {
