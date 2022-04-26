@@ -29,12 +29,12 @@ const Characters: FC = (): JSX.Element => {
 
   const sortedCharacters = () => {
     return characters.filter((character) =>
-      character.name.toLowerCase().includes(searchQuery)
+      character.name.toLowerCase().includes(searchQuery.toLowerCase())
     )
   }
 
   const searchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value.toLowerCase())
+    setSearchQuery(e.target.value)
   }
 
   useEffect(() => {
