@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import App from '../../App'
 import Character from '../../pages/Character/Character'
 import Characters from '../../pages/Characters/Characters'
@@ -9,7 +9,7 @@ import NotFound from '../../pages/NotFound/NotFound'
 
 type AppRouterPropsType = {
   isAuth: boolean
-  loginHandler: (e: any) => void
+  loginHandler: (e: any, login: string, password: string) => void
 }
 
 const AppRouter: FC<AppRouterPropsType> = ({
@@ -18,8 +18,6 @@ const AppRouter: FC<AppRouterPropsType> = ({
 }): JSX.Element => {
   return isAuth ? (
     <Routes>
-      {/* {routes.map((route, i) => <Route index={route.index} path={route.path} element={route.element === Characters ? <Characters characters={characters}/> : route.element}/>
-      )} */}
       <Route path="/" element={<App />} />
       <Route index element={<Home />} />
       <Route path="login" element={<Characters />} />
@@ -34,6 +32,7 @@ const AppRouter: FC<AppRouterPropsType> = ({
       <Route path="/" element={<App />} />
       <Route index element={<Home />} />
       <Route path="/login" element={<Login loginHandler={loginHandler} />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   )
 }

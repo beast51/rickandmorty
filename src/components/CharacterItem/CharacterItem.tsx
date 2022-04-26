@@ -1,14 +1,14 @@
 import React, { FC } from 'react'
-import classes from './CharacterItem.module.scss'
+import s from './CharacterItem.module.scss'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { CharacterItemPropsType } from '../../types/types'
 
 const statusObject: {
   [key: string]: string
 } = {
-  Alive: classes.field__status_live,
-  Dead: classes.field__status_dead,
-  unknown: classes.field__status_unknown,
+  Alive: s.field__status_live,
+  Dead: s.field__status_dead,
+  unknown: s.field__status_unknown,
 }
 
 const CharacterItem: FC<CharacterItemPropsType> = ({
@@ -17,17 +17,16 @@ const CharacterItem: FC<CharacterItemPropsType> = ({
   const navigate = useNavigate()
   const location = useLocation()
   const pageNumber = location.pathname.split('/')[2]
-  const clickHadler = (id: number) => {
+  const clickHandler = (id: number) => {
     navigate(`/character/${id}`, { state: { page: pageNumber } })
-    console.log(pageNumber)
   }
 
   return (
-    <li className={classes.item} onClick={() => clickHadler(id)}>
-      <img className={classes.item__image} src={image} alt={name} />
+    <li className={s.item} onClick={() => clickHandler(id)}>
+      <img className={s.item__image} src={image} alt={name} />
       <ul>
-        <li className={classes.item__field}>{name}</li>
-        <li className={classes.item__field}>
+        <li className={s.item__field}>{name}</li>
+        <li className={s.item__field}>
           Status: <span className={statusObject[status]}>{status}</span>
         </li>
       </ul>

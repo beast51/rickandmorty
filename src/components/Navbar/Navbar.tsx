@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Button from '../UI/Button/Button'
-import classes from './Navbar.module.scss'
+import s from './Navbar.module.scss'
 
 type NavbarType = {
   isAuth: boolean
@@ -17,36 +17,36 @@ const Navbar: FC<NavbarType> = ({
   const navigate = useNavigate()
 
   return (
-    <nav className={classes.ram__navbar}>
-      <div className={classes.navbar__container}>
-        <Link className={classes.navbar__logo} to="/">
+    <nav className={s.ram__navbar}>
+      <div className={s.navbar__container}>
+        <Link className={s.navbar__logo} to="/">
           Rick and Morty
         </Link>
-        <ul className={classes.navbar__btns}>
+        <ul className={s.navbar__btns}>
           {isAuth && (
-            <li className={classes.navbar__btn}>
+            <li className={s.navbar__btn}>
               {isCharacter ? (
                 <Button
-                  className={classes.navbar__button}
+                  className={s.navbar__button}
                   onClick={() => navigate(-1)}
                 >
                   Back to characters
                 </Button>
               ) : (
                 <Link to="/characters/1">
-                  <Button className={classes.navbar__button}>Characters</Button>
+                  <Button className={s.navbar__button}>Characters</Button>
                 </Link>
               )}
             </li>
           )}
-          <li className={classes.navbar__btn}>
+          <li className={s.navbar__btn}>
             {isAuth ? (
               <Link onClick={() => loginNavbarHandler()} to="/">
-                <Button className={classes.navbar__button}>Logout</Button>
+                <Button className={s.navbar__button}>Logout</Button>
               </Link>
             ) : (
               <Link onClick={() => loginNavbarHandler()} to="/login">
-                <Button className={classes.navbar__button}>Login</Button>
+                <Button className={s.navbar__button}>Login</Button>
               </Link>
             )}
           </li>

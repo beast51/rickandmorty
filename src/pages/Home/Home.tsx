@@ -1,11 +1,15 @@
 import React, { FC } from 'react'
-import classes from './Home.module.scss'
+import s from './Home.module.scss'
 import background from '../../styles/wallpaper_5.jpg'
 
 const Home: FC = () => {
   return (
-    <div className={classes.ram__home}>
-      <img className={classes.ram__image} src={background} alt="rick and morty wallpaper" />
+    <div className={s.ram__home}>
+      <img
+        className={s.ram__image}
+        src={background}
+        alt="rick and morty wallpaper"
+      />
     </div>
   )
 }

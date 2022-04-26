@@ -3,31 +3,29 @@ import CharacterItems from '../../components/CharacterItems/CharacterItems'
 import DataService from '../../API/DataService'
 import { useFetching } from '../../hooks/useFetching'
 import Input from '../../components/UI/Input/Input'
-import classes from './Characters.module.scss'
+import s from './Characters.module.scss'
 import Pagination from '@mui/material/Pagination'
 import { useNavigate, useParams } from 'react-router-dom'
 import { CharacterType } from '../../types/types'
 import { AxiosResponse } from 'axios'
+import Spinner from '../../components/UI/Spinner/Spinner'
 
 const Characters: FC = (): JSX.Element => {
-  const [characters, setCharacters] = useState<CharacterType[]>([])
   const params = useParams()
   const navigate = useNavigate()
+  const [characters, setCharacters] = useState<CharacterType[]>([])
   const [page, setPage] = useState(Number(params.id) | 1)
   const [totalPages, setTotalPages] = useState(0)
-
-  const handleChange = (event: React.ChangeEvent<unknown>, page: number) => {
-    navigate(`/characters/${page}`)
-  }
   const [searchQuery, setSearchQuery] = useState('')
-
-  console.log('totalPages', totalPages)
-
   const [fetchingData, isLoading, error] = useFetching(async () => {
     const response: AxiosResponse = await DataService.getCharacters(page)
     setCharacters(response.data.results)
     setTotalPages(response.data.info.pages)
   }) as any
+
+  const handleChange = (event: React.ChangeEvent<unknown>, page: number) => {
+    navigate(`/characters/${page}`)
+  }
 
   const sortedCharacters = () => {
     return characters.filter((character) =>
@@ -39,8 +37,6 @@ const Characters: FC = (): JSX.Element => {
     setSearchQuery(e.target.value)
   }
 
-  console.log('params.id', params.id)
-
   useEffect(() => {
     fetchingData()
   }, [page])
@@ -50,23 +46,29 @@ const Characters: FC = (): JSX.Element => {
   }, [params])
 
   return (
-    <main className={classes.characters}>
-      <div className={classes.characters__container}>
+    <main className={s.characters}>
+      <div className={s.characters__container}>
         <Input
           value={searchQuery}
           onChange={searchHandler}
-          className={classes.characters__input}
+          className={s.characters__input}
           placeholder="Search..."
         />
-        <CharacterItems characters={sortedCharacters()} />
-        <div className={classes.characters__pagination}>
-          <Pagination
-            size="small"
-            count={totalPages}
-            page={page}
-            onChange={handleChange}
-          />
-        </div>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <>
+            <CharacterItems characters={sortedCharacters()} />
+            <div className={s.characters__pagination}>
+              <Pagination
+                size="small"
+                count={totalPages}
+                page={page}
+                onChange={handleChange}
+              />
+            </div>
+          </>
+        )}
       </div>
     </main>
   )
