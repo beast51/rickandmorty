@@ -18,6 +18,8 @@ export type CharacterType = {
   url: string
 }
 
+
+
 export type CharacterItemPropsType = {
   character: CharacterType
 }
